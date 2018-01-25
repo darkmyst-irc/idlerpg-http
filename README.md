@@ -6,9 +6,13 @@ The sources you see here are a first sloppy attempt at that - please feel free t
 
 # Prerequities
 
-You'll need a map file. You can use the original IdleRPG map (see http://idlerpg.net/worldmap.php) or create one from scratch. _Note that the labels on the map will need to be roughly in the same place unless you also change the source of your IdleRPG bot - the IdleRPG bot will generate quests that refer to the places on the map._
+- a map file (PNG format)
+- PHP GD (for world maps)
+- Apache with `mod_rewrite`
 
-This frontend requires PHP GD as it relies on being able to generate PNGs for world maps.
+## Map file
+
+If you don't have a PNG map file, you can use the original IdleRPG map (see http://idlerpg.net/worldmap.php) or create one from scratch. _If you do create one from scratch, note that the labels on the map will need to be roughly **in the same place** as in the original, unless you also change the source of your IdleRPG bot - the IdleRPG bot will generate quests that refer to the places (and their approximate coordinations) on the map._
 
 # Installation instructions
 
