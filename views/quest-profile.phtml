@@ -1,0 +1,60 @@
+<?php
+
+    $quest = $parameters['quest'];
+
+if (is_null($quest)) {
+
+    echo '<p>Sorry, there is no quest active at the moment.</p>';
+
+} else {
+
+    $goal = $quest->getCurrentGoal();
+
+?><h2>Current Quest</h2>
+
+<p><strong>Quest</strong>: To <?php echo htmlspecialchars($quest->getDescription()); ?>.</p>
+
+<?php
+
+    if (!is_null($quest->getCurrentGoal())) {
+        echo '<p><strong>Current goal</strong>: ['
+            . htmlspecialchars($goal['x'] . ',' . $goal['y'])
+            . ']</p>';
+    }
+
+    if (!is_null($quest->getTime())) {
+        echo '<p><strong>Time to completion</strong>: '
+            . Duration::format($quest->getTime())
+            . '</p>';
+    }
+
+    $participants = $quest->getInvolvedPlayers();
+    $participantCount = 0;
+
+    $showmap = false;
+    foreach ($participants as $participant) {
+        $participantCount++;
+        echo '<p><strong>Participant ' . $participantCount . '</strong>: '
+            . '<a href="' . htmlspecialchars($this->makeUrl('player/' . urlencode($participant['name']))) . '">'
+            . htmlspecialchars($participant['name']) . '</a>';
+        if (!is_null($participant['x'])) {
+            echo '<br /><strong>Position</strong>: [' . htmlspecialchars($participant['x'] . ',' . $participant['y']) . ']';
+            $showmap = true;
+        }
+        echo '</p>';
+    }
+
+    if ($showmap) {
+        echo '<h3>Quest Map</h3>';
+        $mapView = new View('map');
+        $mapView->render(
+            array(
+                'sets' => array($participants, array($goal)),
+                'render-names' => true,
+            ),
+            true
+        );
+
+    }
+
+}

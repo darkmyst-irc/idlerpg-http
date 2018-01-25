@@ -1,0 +1,31 @@
+<h2>World Map</h2>
+
+<p>[offline users are red, online users are blue]</p>
+<?php
+
+    $onlinePlayers  = array();
+    $offlinePlayers = array();
+    foreach ($parameters['players'] as $player) {
+        $playerPosition = array_merge(
+            array('name' => $player->getCharacter()->getName(),),
+            $player->getCharacter()->getPosition()
+        );
+        if ($player->getStatus()->isOnline()) {
+            $onlinePlayers[] = $playerPosition;
+        } else {
+            $offlinePlayers[] = $playerPosition;
+        }
+    }
+
+    $renderParams = array(
+        'sets' => array(
+            $onlinePlayers,
+            $offlinePlayers,
+        )
+    );
+
+    $mapView = new View('map');
+    $mapView->render(
+        $renderParams,
+        true
+    );

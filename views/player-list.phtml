@@ -1,0 +1,18 @@
+<ol>
+<?php
+    foreach ($parameters['players'] as $player) {
+        $character = $player->getCharacter();
+        $class     = null;
+        if (!$player->getStatus()->isOnline()) {
+            $class = 'offline';
+        }
+        echo '<li' . (is_null($class) ? '' : ' class="' . htmlspecialchars($class) . '"') . '>'
+            . '<a href="' . htmlspecialchars($this->makeUrl('player/' . urlencode($character->getName()))) . '">'
+            . htmlspecialchars($character->getName()) . '</a>'
+            . ', the level ' . htmlspecialchars($character->getLevel())
+            . ' ' . htmlspecialchars($character->getClass()) . '.'
+            . ' Next level in ' . Duration::format($player->getStatus()->getSecondsToNextLevel())
+            . '.</li>';
+    }
+?>
+</ol>

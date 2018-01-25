@@ -1,0 +1,135 @@
+body {
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-size:cover;
+    background-color:#4B9CD1;
+    font-family:Verdana,Arial,sans-serif;
+    font-size:0.8em;
+    line-height:2em;
+}
+
+table {
+    font-size:1em;
+    margin-bottom:10px;
+}
+
+table th {
+    text-align:left;
+    padding-right:20px;
+}
+
+table td {
+    padding:3px;
+}
+
+h1, h2, h3 {
+    margin-top:0px;
+}
+
+h2, h3 {
+    padding-bottom:3px;
+    border-bottom:1px solid #888;
+}
+
+tt,
+pre {
+    font-size:1.1em;
+    font-weight:bold;
+}
+
+a {
+    color:#C69500;
+}
+
+nav {
+    box-sizing:border-box;
+    width:15%;
+    padding:0px;
+    float:left;
+    background-color:#fff;
+}
+
+nav ul {
+    list-style-type:none;
+    padding:0px;
+    margin:0px;
+}
+
+nav ul li {
+    list-style-type:none;
+    padding:0px;
+    margin:0px;
+}
+
+nav ul li a {
+    display:block;
+    text-decoration:none;
+    border:1px solid transparent;
+    padding:8px;
+}
+
+nav ul li.selected a,
+nav ul li a:hover {
+    color:#000;
+    background-color:#ccc;
+    border:1px solid #000;
+}
+
+div.content {
+    box-sizing:border-box;
+    width:80%;
+    padding:10px;
+    margin-left:10px;
+    float:left;
+    background-color:#fff;
+}
+
+footer {
+    clear:both;
+    padding:10px;
+}
+
+footer p {
+    padding:10px;
+    margin-top:10px;
+    background-color:#fff;
+}
+
+ol li.offline {
+    color:#aaa;
+}
+
+ol li.offline a {
+    color:#888;
+}
+
+div.profileSection {
+    box-sizing:border-box;
+    width:33%;
+    float:left;
+    padding:10px;
+}
+
+div.mapSection {
+    clear:both;
+}
+
+@media screen and (max-width: 970px) {
+    div.profileSection {
+        width:50%;
+        min-width:300px;
+    }
+}
+
+span.specialItem {
+    color:#0c9;
+    font-weight:bold;
+}
+
+div#map {
+    padding:10px;
+}
+
+div#map img {
+    border:3px solid #C69500;
+}

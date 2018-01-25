@@ -1,0 +1,142 @@
+<?php
+
+$player = $parameters['player'];
+
+if (is_null($player)) {
+
+    // player was not found
+    echo '<p>The player you requested does not exist.</p>';
+
+} else {
+
+    $character = $player->getCharacter();
+    $status    = $player->getStatus();
+    $position  = $character->getPosition();
+    $inventory = $character->getInventory();
+    $penalties = $player->getPenalties();
+
+?><h2>Profile</h2>
+
+<div class="profileSection">
+  <h3>Character</h3>
+  <p><strong>Name</strong>: <?php echo htmlspecialchars($character->getName()); ?></p>
+  <p><strong>Class</strong>: <?php echo htmlspecialchars($character->getClass()); ?></p>
+  <p><strong>Level</strong>: <?php echo htmlspecialchars($character->getLevel()); ?></p>
+  <p><strong>Alignment</strong>: <?php echo htmlspecialchars($character->getAlignment()); ?></p>
+  <p><strong>Position</strong>: [<?php echo htmlspecialchars($position['x'] . ',' . $position['y']); ?>]</p>
+</div>
+
+<div class="profileSection">
+  <h3>Inventory</h3>
+<?php
+
+    $itemTypes = array(
+        Inventory::AMULET,
+        Inventory::BOOTS,
+        Inventory::CHARM,
+        Inventory::GLOVES,
+        Inventory::HELM,
+        Inventory::LEGGINGS,
+        Inventory::RING,
+        Inventory::SHIELD,
+        Inventory::TUNIC,
+        Inventory::WEAPON,
+    );
+
+    $total = 0;
+    foreach ($itemTypes as $itemType) {
+        $level = $inventory->getItem($itemType)->getLevel();
+        echo '<p><strong>' . htmlspecialchars(ucfirst($itemType)) . '</strong>: ' . htmlspecialchars($level);
+        if ($inventory->getItem($itemType)->getName()) {
+            echo ' [<span class="specialItem">' . htmlspecialchars($inventory->getItem($itemType)->getName()) . '</span>]';
+        }
+        echo '</p>';
+        $total += $level;
+    }
+    echo '<p>(Item level sum: ' . $total . ')</p>';
+
+?>
+</div>
+
+<div class="mapSection">
+  <h3>Location</h3>
+<?php
+    $mapView = new View('map');
+    $mapView->render(
+        array(
+            'sets' => array(
+                // players:
+                array(
+                    // player
+                    array(
+                        'name' => $character->getName(),
+                        'x'    => $position['x'],
+                        'y'    => $position['y'],
+                    ),
+                )
+            ),
+            'render-names' => true,
+        ),
+        true
+    );
+?>
+</div>
+
+<div class="profileSection">
+  <h3>Penalties</h3>
+<?php
+
+    $penaltyTypes = array(
+        Penalties::KICKED,
+        Penalties::LOGOUT,
+        Penalties::MESSAGE,
+        Penalties::NICKCHANGE,
+        Penalties::PART,
+        Penalties::QUEST,
+        Penalties::QUIT,
+    );
+
+    $penaltiesOverall = 0;
+    foreach ($penaltyTypes as $penaltyType) {
+        $penaltyInSeconds = $penalties->getSeconds($penaltyType);
+
+        $penalty = 'None';
+        if ($penaltyInSeconds !== 0) {
+            $penalty = Duration::format($penaltyInSeconds);
+        }
+        echo '<p><strong>Penalty for ' . htmlspecialchars($penaltyType) . '</strong>: ' . $penalty . '</p>';
+
+        $penaltiesOverall += $penaltyInSeconds;
+    }
+    echo '<p>(Penalties overall: ' . Duration::format($penaltiesOverall) . ')</p>';
+
+?>
+</div>
+
+<div class="profileSection">
+  <h3>Modifiers</h3>
+  <p><tt><?php
+foreach ($parameters['modifiers'] as $modifier) {
+    echo htmlspecialchars($modifier->getRawText()) . "<br />";
+}
+?></tt></p>
+</div>
+
+<div class="profileSection">
+  <h3>Current Status</h3>
+  <p><strong>Online?</strong>: <?php echo ($status->isOnline() ? 'Yes' : 'No'); ?></p>
+  <p><strong>Next level</strong>: <?php echo Duration::format($status->getSecondsToNextLevel()); ?></p>
+</div>
+
+<div class="profileSection">
+  <h3>Account</h3>
+  <p><strong>Created</strong>: <?php echo ($player->getTimeCreated()->format('Y-m-d H:i:s')); ?></p>
+  <p><strong>Last login</strong>: <?php echo ($player->getLastLogin()->format('Y-m-d H:i:s')); ?></p>
+  <p><strong>Total time idled</strong>: <?php echo Duration::format($status->getSecondsIdled()); ?></p>
+  <p><strong>Admin?</strong>: <?php echo ($player->isAdmin() ? 'Yes' : 'No'); ?></p>
+</div>
+
+<?php
+
+}
+

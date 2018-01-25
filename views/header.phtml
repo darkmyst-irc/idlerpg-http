@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>IdleRPG on <?php echo htmlspecialchars($this->getConfigurationValue('general', 'network', 'Darkmyst')); ?></title>
+    <link rel="stylesheet" href="<?php
+        echo htmlspecialchars(rtrim($this->getConfigurationValue('general', 'webroot'), '/'));
+    ?>/assets/style.css" />
+  </head>
+  <body>
+
+<h1>IdleRPG</h1>
+<p><strong><?php echo $this->getConfigurationValue('general', 'channel', '#IdleRPG'); ?> @ <?php echo $this->getConfigurationValue('general', 'network_addr', 'irc.darkmyst.org'); ?></strong></p>
+
+    <nav>
+      <ul>
+<?php
+
+$urls = array(
+    '/'             => 'Game Info',
+    '/players/list' => 'Player Info',
+    '/map/view'     => 'World Map',
+    '/quests/show'  => 'Quest Info',
+);
+$open = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+foreach ($urls as $url => $label) {
+    $url = $this->makeUrl($url);
+
+    echo '<li';
+    if ($url === $open) {
+        echo ' class="selected"';
+    }
+    echo '><a href="' . htmlspecialchars($url) . '">' . htmlspecialchars($label) . '</a></li>';
+}
+?>
+      </ul>
+    </nav>
+
+    <div class="content">

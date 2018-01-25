@@ -1,0 +1,65 @@
+<?php
+
+    if (!array_key_exists('alt', $parameters)) {
+        $parameters['alt'] = '';
+    }
+    if (!array_key_exists('title', $parameters)) {
+        $parameters['title'] = '';
+    }
+    if (!array_key_exists('sets', $parameters)) {
+        $parameters['sets'] = array();
+    }
+    if (!array_key_exists(0, $parameters['sets'])) {
+        $parameters['sets'][0] = array();
+    }
+
+    $renderParameters = array();
+    foreach ($parameters['sets'] as $dotSet) {
+        $newSet = array();
+        foreach ($dotSet as $dot) {
+            $newDot = array(
+                'x' => $dot['x'],
+                'y' => $dot['y'],
+            );
+            if (
+                array_key_exists('render-names', $parameters)
+                && ($parameters['render-names'])
+            ) {
+                $newDot['name'] = array_key_exists('name', $dot) ? $dot['name'] : '';
+            }
+            $newSet[] = $newDot;
+        }
+        $renderParameters[] = $newSet;
+    }
+
+    $allDots = $parameters['sets'];
+
+    $mapAlt   = $parameters['alt'];
+    $mapTitle = $parameters['title'];
+
+?><div id="map"><img src="<?php echo htmlspecialchars($this->makeUrl('map/render?dots=' . urlencode(Map::makeParam($renderParameters)))); ?>" alt="<?php echo htmlspecialchars($mapAlt); ?>" title="<?php echo htmlspecialchars($mapTitle); ?>" usemap="#mapdata" border="0" height="<?php echo htmlspecialchars(Map::getMapHeight()); ?>" width="<?php echo htmlspecialchars(Map::getMapWidth()); ?>" /></div>
+<map id="mapdata" name="mapdata">
+<?php
+
+    foreach ($allDots as $dotSet) {
+        foreach ($dotSet as $dot) {
+            if (!array_key_exists('name', $dot)) {
+                $dot['name'] = '';
+            }
+            echo '<area'
+                . ' shape="circle"'
+                . ' coords="'
+                    . (Map::getX($dot['x']) + ceil(Map::getDotSize() / 2)) . ','
+                    . (Map::getY($dot['y']) + ceil(Map::getDotSize() / 2)) . ','
+                    . (ceil(Map::getDotSize() / 2) + 2)
+                . '"'
+                . ' alt="' . htmlspecialchars($dot['name']) . '"';
+            if (!empty($dot['name'])) {
+                echo ' href="' . htmlspecialchars($this->makeUrl('player/' . urlencode($dot['name']))) . '"';
+            }
+            echo ' title="' . htmlspecialchars($dot['name']). '" />' . PHP_EOL;
+        }
+    }
+
+?>
+</map>
