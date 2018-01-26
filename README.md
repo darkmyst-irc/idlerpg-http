@@ -12,7 +12,7 @@ The sources you see here are a first sloppy attempt at that - please feel free t
 
 ## Map file
 
-If you don't have a PNG map file, you can use the original IdleRPG map (see http://idlerpg.net/worldmap.php) or create one from scratch. _If you do create one from scratch, note that the labels on the map will need to be roughly **in the same place** as in the original, unless you also change the source of your IdleRPG bot - the IdleRPG bot will generate quests that refer to the places (and their approximate coordinations) on the map._
+If you don't have a PNG map file, you can use the original IdleRPG map (see http://idlerpg.net/worldmap.php) or create one from scratch. _If you do create one from scratch, note that the labels on the map will need to be roughly **in the same place** as in the original, unless you also change the events file of your IdleRPG bot - the IdleRPG bot will generate quests that refer to the places (and their approximate coordinations) on the map._
 
 # Installation instructions
 
