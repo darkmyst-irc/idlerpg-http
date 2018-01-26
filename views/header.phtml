@@ -8,7 +8,13 @@
   <body>
 
 <h1>IdleRPG</h1>
-<p><strong><?php echo $this->getConfigurationValue('general', 'channel', '#IdleRPG'); ?> @ <?php echo $this->getConfigurationValue('general', 'network_addr', 'irc.darkmyst.org'); ?></strong></p>
+<p><strong><?php echo htmlspecialchars($this->getConfigurationValue('botconf', 'botchan', '#IdleRPG')); ?> @ <?php
+
+    $botconfServer = $this->getConfigurationValue('botconf', 'server', 'irc.darkmyst.org:6667');
+    list($server) = explode(':', $botconfServer);
+    echo htmlspecialchars($server);
+
+?></strong></p>
 
     <nav>
       <ul>

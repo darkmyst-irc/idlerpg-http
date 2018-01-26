@@ -55,17 +55,23 @@ class Controller
 
     public function getDatabaseFileLines()
     {
-        return array_slice(file($this->configuration['files']['players']), 1);
+        $dirname  = dirname($this->configuration['general']['botconf']);
+        $filename = $dirname . '/' . $this->configuration['botconf']['dbfile'];
+        return array_slice(file($filename), 1);
     }
 
     public function getModifierFileLines()
     {
-        return file($this->configuration['files']['modifiers']);
+        $dirname  = dirname($this->configuration['general']['botconf']);
+        $filename = $dirname . '/' . $this->configuration['botconf']['modsfile'];
+        return file($filename);
     }
 
     public function getQuestFileLines()
     {
-        return file($this->configuration['files']['quests']);
+        $dirname  = dirname($this->configuration['general']['botconf']);
+        $filename = $dirname . '/' . $this->configuration['botconf']['questfilename'];
+        return file($filename);
     }
 
 }

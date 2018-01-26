@@ -45,7 +45,7 @@ class View
         if (!array_key_exists($name, static::$configuration[$section])) {
             return $default;
         }
-        return static::$configuration[$section][$name];
+        return trim(static::$configuration[$section][$name]);
     }
 
 }

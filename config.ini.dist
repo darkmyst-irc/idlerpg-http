@@ -1,21 +1,12 @@
 [general]
-bot_name     = IdleRPG
+botconf      = /opt/idlerpg/.irpg.conf
 network      = NetworkShortname
 network_full = Your Long Network Name
-network_addr = irc.example.com
-channel      = #IdleRPG
 webroot      = /
 
-[files]
-players   = /opt/idlerpg/irpg.db
-modifiers = /opt/idlerpg/modifiers.txt
-quests    = /opt/idlerpg/questinfo.txt
-
 [maps]
-database_dimension_x = 500
-database_dimension_y = 500
-visual_map_width     = 500
-visual_map_height    = 500
-map_file             = /var/www/example.com/idlerpg/assets/mapfile.png
-map_error_url        = https://idlerpg.example.com/assets/mapfile-error.png
-dot_size             = 8
+visual_map_width  = 500
+visual_map_height = 500
+map_file          = /var/www/example.com/idlerpg/assets/mapfile.png
+map_error_url     = https://idlerpg.example.com/assets/mapfile-error.png
+dot_size          = 8

@@ -1,8 +1,8 @@
 <?php
 
-    $botName = htmlspecialchars($this->getConfigurationValue('general', 'bot_name', 'IdleRPG'));
-    $gridX   = (int) $this->getConfigurationValue('maps', 'database_dimension_x', 500);
-    $gridY   = (int) $this->getConfigurationValue('maps', 'database_dimension_y', 500);
+    $botName = htmlspecialchars($this->getConfigurationValue('botconf', 'botnick', 'IdleRPG'));
+    $gridX   = (int) $this->getConfigurationValue('botconf', 'mapx', 500);
+    $gridY   = (int) $this->getConfigurationValue('botconf', 'mapy', 500);
 
 ?>
 
@@ -12,7 +12,13 @@
 
 <h2>Location</h2>
 
-<p>Our instance of Idle RPG can be played on the <a href="irc://<?php echo htmlspecialchars($this->getConfigurationValue('general', 'network_addr', 'irc.darkmyst.org')); ?>"><?php echo htmlspecialchars($this->getConfigurationValue('general', 'network_full', 'Darkmyst IRC Network')); ?></a> in the channel <?php echo htmlspecialchars($this->getConfigurationValue('general', 'channel', '#IdleRPG')); ?>.</p>
+<p>Our instance of Idle RPG can be played on the <a href="irc://<?php
+
+    $botconfServer = $this->getConfigurationValue('botconf', 'server', 'irc.darkmyst.org:6667');
+    list($server) = explode(':', $botconfServer);
+    echo htmlspecialchars($server);
+
+?>"><?php echo htmlspecialchars($this->getConfigurationValue('general', 'network_full', 'Darkmyst IRC Network')); ?></a> in the channel <?php echo htmlspecialchars($this->getConfigurationValue('botconf', 'botchan', '#IdleRPG')); ?>.</p>
 
 <p>We didn't invent this game, though! Check out <a href="http://idlerpg.net">idlerpg.net</a> for the original. :o)</p>
 

@@ -14,6 +14,9 @@ spl_autoload_register('autoload');
 
 $configuration = parse_ini_file(__DIR__ . '/config.ini', true);
 
+$botConfParser = new Parser_Botconf();
+$configuration['botconf'] = $botConfParser->getBotconf(file($configuration['general']['botconf']));
+
 View::setConfiguration($configuration);
 Map::setConfiguration($configuration);
 

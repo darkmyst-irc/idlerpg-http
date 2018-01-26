@@ -163,12 +163,12 @@ class Map
 
     public static function getWorldWidth()
     {
-        return static::$configuration['maps']['database_dimension_x'];
+        return static::$configuration['botconf']['mapx'];
     }
 
     public static function getWorldHeight()
     {
-        return static::$configuration['maps']['database_dimension_y'];
+        return static::$configuration['botconf']['mapy'];
     }
 
     public static function getDotSize()
