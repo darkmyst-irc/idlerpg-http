@@ -16,18 +16,13 @@ class PlayerFactory
         return $this->parser->makePlayer($fields);
     }
 
-    public function makePlayers(array $rows, $keySource = 'name')
+    public function makePlayers(array $rows)
     {
         $players = array();
         foreach ($rows as $row) {
             $player = $this->makePlayer($row);
 
             $key = strtolower($player->getCharacter()->getName());
-
-            $method = 'get' . ucfirst($keySource);
-            if (method_exists($player->getCharacter(), $method)) {
-                $key = strtolower($player->getCharacter()->$method()) . '-' . $key;
-            }
 
             $players[$key] = $player;
         }

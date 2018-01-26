@@ -10,11 +10,19 @@ class Controller
         $this->configuration = $configuration;
     }
 
-    public function getPlayers($sortBy = 'name', $reverse = false)
+    public function getPlayers($sortBy = 'level', $reverse = false)
     {
         $playerFactory = new PlayerFactory(new Parser_Player());
-        $players = $playerFactory->makePlayers($this->getDatabaseFileLines(), $sortBy);
-        ksort($players, SORT_NATURAL);
+        $players = $playerFactory->makePlayers($this->getDatabaseFileLines());
+
+        $playerSort = new PlayerSort();
+        $method     = 'sortBy' . ucfirst($sortBy);
+        if (method_exists($playerSort, $method)) {
+            usort($players, array($playerSort, $method));
+        } else {
+            ksort($players);
+        }
+
         if ($reverse) {
             return array_reverse($players);
         }
