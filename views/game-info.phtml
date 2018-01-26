@@ -157,6 +157,16 @@
 
 <p>Penalty shorthand is p[num]. So, a nick change is a p30 event, parting the channel is a p200 event, and quitting IRC is a p20 event. Messages and notices are p[length of message in characters].</p>
 
+<?php
+
+    $penaltyLimit = (int) $this->getConfigurationValue('botconf', 'limitpen', 0);
+
+    if ($penaltyLimit > 0) {
+        echo '<p>Penalties are capped at <strong>' . Duration::format($penaltyLimit) . '</strong> - you will never be penalised for more than this.</p>';
+    }
+
+?>
+
 <h2>Items</h2>
 
 <p>Each time you level, you find an item. You can find an item as high as 1.5*YOUR_LEVEL (unless you find a unique item). There are 10 types of items: rings, amulets, charms, weapons, helms, tunics, gloves, leggings, shields, and boots. You can find one of each type. When you find an item with a level higher than the level of the item you already have, you toss the old item and start using the new one. As of version 3.0, there is an optional, p0 STATUS command that your admin may have enabled, but you cannot see which items you have over IRC (only your total item sum). You can, however, see which items you have on the web here.</p>
