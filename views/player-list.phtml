@@ -1,12 +1,13 @@
 <h2>Players</h2>
+<p>(Grayed out users are currently offline.)</p>
 
 <ol>
 <?php
     foreach ($parameters['players'] as $player) {
         $character = $player->getCharacter();
-        $class     = null;
+        $class     = $character->getAlignment();
         if (!$player->getStatus()->isOnline()) {
-            $class = 'offline';
+            $class .= ' offline';
         }
         echo '<li' . (is_null($class) ? '' : ' class="' . htmlspecialchars($class) . '"') . '>'
             . '<a href="' . htmlspecialchars($this->makeUrl('player/' . urlencode($character->getName()))) . '">'

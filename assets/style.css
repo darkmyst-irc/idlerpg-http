@@ -103,6 +103,36 @@ ol li.offline a {
     color:#888;
 }
 
+ol li.neutral a::before,
+ol li.evil a::before,
+ol li.good a::before {
+    display:inline-block;
+    padding:0px;
+    padding-left:8px;
+    padding-right:8px;
+    font-size:0.85em;
+    width:60px;
+    text-align:right;
+    font-weight:bold;
+    border-bottom:1px solid #ccc;
+    line-height:1em;
+}
+
+ol li.evil a::before {
+    content:"evil :";
+    color:#c88;
+}
+
+ol li.good a::before {
+    content:"good :";
+    color:#8c8;
+}
+
+ol li.neutral a::before {
+    content:"neutral :";
+    color:#88c;
+}
+
 div.profileSection {
     box-sizing:border-box;
     width:33%;
