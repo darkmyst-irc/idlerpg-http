@@ -3,6 +3,8 @@
 class Controller
 {
 
+    const INFINITE_MODIFIERS = 0;
+
     private $configuration = array();
 
     public function __construct($configuration)
