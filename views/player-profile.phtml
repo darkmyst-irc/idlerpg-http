@@ -114,7 +114,12 @@ if (is_null($player)) {
 </div>
 
 <div class="profileSection">
-  <h3>Modifiers</h3>
+  <h3>Modifiers <small><?php
+    if (array_key_exists('all-modifiers', $_GET)) {
+        echo '<a href="?">[truncate]</a>';
+    } else {
+        echo '<a href="?all-modifiers">[show all]</a>';
+    } ?></small></h3>
   <p><tt><?php
 foreach ($parameters['modifiers'] as $modifier) {
     echo htmlspecialchars($modifier->getRawText()) . "<br />";
