@@ -3,6 +3,7 @@ botconf      = /opt/idlerpg/.irpg.conf
 network      = NetworkShortname
 network_full = Your Long Network Name
 webroot      = /
+credits      = "Image &copy; currently unspecified."
 
 [maps]
 visual_map_width  = 500
