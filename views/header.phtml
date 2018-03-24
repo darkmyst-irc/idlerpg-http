@@ -4,6 +4,11 @@
     <link rel="stylesheet" href="<?php
         echo htmlspecialchars(rtrim($this->getConfigurationValue('general', 'webroot'), '/'));
     ?>/assets/style.css" />
+<?php if (is_file(__DIR__ . '/../assets/custom.css')) { ?>
+    <link rel="stylesheet" href="<?php
+        echo htmlspecialchars(rtrim($this->getConfigurationValue('general', 'webroot'), '/'));
+    ?>/assets/custom.css" />
+<?php } ?>
   </head>
   <body>
 
