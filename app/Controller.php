@@ -42,7 +42,7 @@ class Controller
         return null;
     }
 
-    public function getModifiers($character)
+    public function getModifiers($character, $amount = 5)
     {
         $modifierFactory = new ModifierFactory(new Parser_Modifier());
         $lines = $this->getModifierFileLines();
@@ -52,7 +52,7 @@ class Controller
                 $modifiers[] = $modifier;
             }
         }
-        return $modifiers;
+        return array_slice($modifiers, 0 - $amount);
     }
 
     public function getCurrentQuest()
