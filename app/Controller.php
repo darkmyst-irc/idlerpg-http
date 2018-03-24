@@ -44,7 +44,7 @@ class Controller
         return null;
     }
 
-    public function getModifiers($character, $amount = 5)
+    public function getModifiers($character, $amount = self::INFINITE_MODIFIERS)
     {
         $modifierFactory = new ModifierFactory(new Parser_Modifier());
         $lines = $this->getModifierFileLines();
