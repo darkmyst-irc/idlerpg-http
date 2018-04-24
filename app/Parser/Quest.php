@@ -27,7 +27,7 @@ class Parser_Quest
         return new Quest(
             (int) $this->getFromArray($questData, static::KEY_TYPE),
             $this->getFromArray($questData, static::KEY_DESCRIPTION),
-            (int) $this->getFromArray($questData, static::KEY_STAGE_OR_TIME),
+            time() - ((int) $this->getFromArray($questData, static::KEY_STAGE_OR_TIME)),
             $this->extractGoals($questData),
             $this->extractPlayers($questData)
         );
@@ -59,8 +59,8 @@ class Parser_Quest
                 $playerData = explode(' ', $questData[$key]);
                 $players[$key] = array(
                     'name' => $this->getFromArray($playerData, static::KEY_PLAYER_NAME),
-                    'x'    => (int) $this->getFromArray($playerData, static::KEY_PLAYER_POS_X),
-                    'y'    => (int) $this->getFromArray($playerData, static::KEY_PLAYER_POS_Y),
+                    'x'    => $this->getFromArray($playerData, static::KEY_PLAYER_POS_X),
+                    'y'    => $this->getFromArray($playerData, static::KEY_PLAYER_POS_Y),
                 );
             }
         }
@@ -72,7 +72,7 @@ class Parser_Quest
         if (!array_key_exists($key, $array)) {
             return null;
         }
-        return $array[$key];
+        return trim($array[$key]);
     }
 
 }
